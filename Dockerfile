@@ -1,9 +1,16 @@
 FROM node:18
-ENV PORT 4200
-EXPOSE 4200
-RUN mkdir -p /usr/src/app
+# Create app directory
 WORKDIR /usr/src/app
-COPY package.json /usr/src/app
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
 RUN npm install
-COPY . /usr/src/app
-CMD ["node", "/usr/src/app/server.js"]
+# If you are building your code for production
+# RUN npm ci --omit=dev
+# Bundle app source
+COPY . .
+EXPOSE 80
+ENTRYPOINT ["/usr/src/app/"]
+CMD [ "node", "start" ]
+
