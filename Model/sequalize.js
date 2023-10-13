@@ -1,7 +1,9 @@
 var sequelize = require("sequelize");
 
 var sequelizeDb = new sequelize(
-    'mydb','root','admin',
+    'mydb',
+    'root',
+    'admin',
     {
         host: 'localhost',
         dialect: 'mysql',

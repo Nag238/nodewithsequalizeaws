@@ -7,7 +7,7 @@ const program = require("./controllers/programecontroller")
 app.use("/api/program", program)
 
 app.get("/", (req, res) => {
-    db.sequelize.sync({ force: true }).then(() => {
+    db.sequelize.sync().then(() => {
         res.send("Api Running");
     })
 });
