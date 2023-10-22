@@ -49,7 +49,7 @@ module.exports.PutEvents = async (logGroupName, logStreamName, message) => {
         await cloudWatchLogs.putLogEvents(param).promise()
     }
     catch (error) {
-        console.log('error occured')
+        console.log('error occured'+error.stack)
     }
 }
 
