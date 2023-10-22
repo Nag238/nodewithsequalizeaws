@@ -1,6 +1,8 @@
 const express = require("express");
 var emprouter = express.Router();
 var db = require("../Model/sequalize");
+var cloudWatchLogger = require('../Model/cloudwatchLogger')
+
 
 
 emprouter.post('/AddRecord', async (req, res) => {
@@ -55,6 +57,8 @@ getUserInfo = async function () {
 
 emprouter.get("/list", async (req, res) => {
     try {
+        await cloudWatchLogger.CreateCloudLoggerAndStream("testingGroup", "testStream");
+        await cloudWatchLogger.PutEvents("testingGroup", "testStream", '{ "testing": 1234 }')
         return await getDepartmentDetails();
     } catch (error) {
         var json = { 'Error': error, "StatusCode": 500 }
